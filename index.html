@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokédex</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Pokedéx</h1>
+        </header>
+        <main>
+            <div class="content">
+                <button v-if="!start" @click="start=true" class="return" >Return</button>
+                <nav class="modules">
+                    <div id='general' class="module" v-if="start">
+                        <ul>
+                            <li v-for="(pokemon, p) in pokemons" @click="pokemonInfos(pokemons[p].name)" >{{ pokemons[p].name }}</li>
+                        </ul>
+                    </div>
+                    <div id="specific" class="module" v-if="!start">
+                        <ul>
+                            <li><b>NAME :</b> {{ infos.name }} </li>
+                            <li><img :src =" infos.sprites.front_default " ><img :src=" infos.sprites.back_default " ></li>
+                            <li><b>HEIGHT :</b> {{ infos.height * 10 }} cm</li>
+                            <li><b>WEIGHT :</b> {{ infos.weight / 10 }} kg</li>
+                            <li><b>BASE STAT</b>
+                                <li v-for="(stats_b, s) in infos.stats"><b>{{ infos.stats[s].stat.name }} : </b>
+                                <span>{{ infos.stats[s].base_stat }}</span></li>
+                            <li><b><div>ABILITIES :<div></b>
+                                <span v-for="(skill, a) in infos.abilities"><div><p><span class="orange">{{ infos.abilities[a].ability.name }}</span></p></div></span></li>
+                            <li><b>TYPES :</b>
+                                <span v-for="(kind, t) in infos.types"><div><p><span class="blue">{{ infos.types[t].type.name }} </span></p></span></div></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div> 
+        </main>
+        <footer>
+            <div>Fernanda Rezende | Web Developer | 2020 </div>
+        </footer>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        start: true,
+        pokemons: [],
+        infos: [],
+      },
+      created() {
+            axios
+          .get('https://pokeapi.co/api/v2/pokemon')
+          .then(response => (this.getPokemons(response.data.count)))
+      },
+
+      methods: {
+        getPokemons(pokemonCount){
+          axios
+         .get("https://pokeapi.co/api/v2/pokemon?limit="+pokemonCount)
+         .then(response => (this.pokemons = response.data.results))
+        },
+
+        pokemonInfos(name) {
+         axios
+         .get("https://pokeapi.co/api/v2/pokemon/"+name)
+         .then(response => {this.infos = response.data; this.start=false})
+        },
+
+      },
+    })
+  </script>
+

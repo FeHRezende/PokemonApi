@@ -1,0 +1,138 @@
+* {
+    font-family: 'Oswald', sans-serif;
+    box-sizing: border-box;
+}
+
+span {
+    margin: 0px;
+}
+
+body {
+    height: 100vh;
+    margin: 0px;
+    display: grid;
+    grid-template-rows: 120px 1fr 60px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "main" "footer";
+}
+
+header {
+    grid-area: header;
+    background-color: #c24444;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    z-index: 1;
+    box-shadow: -3px 9px 4px -7px rgba(0,0,0,0.48);
+}
+
+header > h1 {
+    margin: 0px;
+    font-weight: 300;
+    font-size: 2.8rem;
+}
+
+ button.return {
+    position: fixed;
+    background-color: #555;
+    text-decoration: none;
+    color: #FFF;
+    font-weight: 300;
+    font-size: 1.3rem;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border: 0px;
+}
+
+main {
+    grid-area: main;
+    height: calc(100vh - 100px);
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.content{
+    position: relative;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    grid-area: footer;
+    background-color:  #c24444;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 1.2rem;
+    padding: 8.5px;
+    color: black;
+    position: sticky;
+
+}
+
+.modules {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.module {
+    flex-basis: 20%;
+    margin-bottom: 20px;
+    border-radius: 3px;
+}
+
+.module > ul {
+    margin: 0px;
+    padding: 10px;
+    list-style: none;
+}
+
+.module > ul > li {
+    padding: 7px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.module > ul > li > a {
+    display: flex;
+    text-decoration: none;
+    color: #222;
+}
+
+.module > ul > li:hover {
+    background-color: #EEE;
+}
+
+#specific {
+    text-align: left;
+}
+
+span.orange { 
+    background-color: #FF9800;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0px;
+    font-size: 1rem;
+}
+
+span.blue { 
+    background-color: #1d82f5;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0px;
+    font-size: 1rem;
+}
+
+p {
+    margin: 12px;
+}
